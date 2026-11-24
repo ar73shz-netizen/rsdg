@@ -1,0 +1,87 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Cache Gradle files
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Install JavaScript dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Keep the same debug signing key between builds
+        run: |
+          mkdir -p ~/.android
+          cp android-debug.keystore ~/.android/debug.keystore
+
+      - name: Create Android project
+        run: npx cap add android
+
+      - name: Bundle local fonts
+        run: |
+          mkdir -p www/fonts
+          F=$(find node_modules/vazirmatn -name '*wght*.woff2' -print -quit)
+          if [ -z "$F" ]; then F=$(find node_modules/vazirmatn -name 'Vazirmatn-Regular.woff2' -print -quit); fi
+          if [ -n "$F" ]; then cp "$F" www/fonts/Vazirmatn.woff2; fi
+          L=$(find node_modules/@fontsource/lalezar -name '*arabic-400-normal.woff2' -print -quit)
+          if [ -n "$L" ]; then cp "$L" www/fonts/Lalezar.woff2; fi
+
+      - name: Sync Capacitor Android project
+        run: npx cap sync android
+
+      - name: Add app icon, sound and register native home-screen widget
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          python tools/make_icons.py
+          mkdir -p android/app/src/main/res/raw
+          cp resources/alarm.wav android/app/src/main/res/raw/alarm.wav
+          bash tools/setup_native.sh
+
+      - name: Build debug APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: personal-manager-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
