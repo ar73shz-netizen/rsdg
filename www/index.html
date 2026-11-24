@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مدیریت فردی</title>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'VazirLocal';src:url('fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900}
+@font-face{font-family:'LalezarLocal';src:url('fonts/Lalezar.woff2') format('woff2')}
+:root{--bg:#f1f4f9;--card:rgba(255,255,255,.42);--tx:#16233f;--mu:#5d6b86;--bd:rgba(60,80,140,.18);--bar:linear-gradient(135deg,#6d28d9,#c084fc);--bt:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1524;--card:rgba(255,255,255,.1);--tx:#e9eefb;--mu:#98a6c4;--bd:rgba(140,160,255,.22)}}
+:root[data-theme="dark"]{--bg:#0f1524;--card:rgba(255,255,255,.1);--tx:#e9eefb;--mu:#98a6c4;--bd:rgba(140,160,255,.22)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{background:var(--bg)}
+body{display:flex;flex-direction:column;font:17px/1.75 'VazirLocal','Vazirmatn',Tahoma,sans-serif;color:var(--tx);background:transparent}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(520px 420px at 92% 4%,rgba(139,92,246,.38),transparent 62%),radial-gradient(480px 420px at 4% 28%,rgba(34,211,238,.34),transparent 62%),radial-gradient(540px 480px at 88% 68%,rgba(244,114,182,.34),transparent 62%),radial-gradient(480px 420px at 6% 96%,rgba(250,204,21,.30),transparent 62%),linear-gradient(180deg,#EEF0FF,#F7EFFF)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) body::before{background:radial-gradient(520px 420px at 92% 4%,rgba(139,92,246,.3),transparent 62%),radial-gradient(480px 420px at 4% 28%,rgba(34,211,238,.22),transparent 62%),radial-gradient(540px 480px at 88% 68%,rgba(244,114,182,.24),transparent 62%),linear-gradient(180deg,#11152a,#1a1234)}}
+:root[data-theme="dark"] body::before{background:radial-gradient(520px 420px at 92% 4%,rgba(139,92,246,.3),transparent 62%),radial-gradient(480px 420px at 4% 28%,rgba(34,211,238,.22),transparent 62%),radial-gradient(540px 480px at 88% 68%,rgba(244,114,182,.24),transparent 62%),linear-gradient(180deg,#11152a,#1a1234)}
+header,nav{background:var(--bar);color:var(--bt)}
+header{position:relative;overflow:hidden;padding:14px 18px 16px;display:flex;align-items:center;gap:10px;border-radius:0 0 22px 22px;box-shadow:0 4px 18px rgba(0,0,0,.18);z-index:2}
+header img{width:60px;height:60px;border-radius:12px;object-fit:cover;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+h1{font:400 25px 'LalezarLocal','Lalezar','VazirLocal','Vazirmatn',sans-serif;margin:0;flex:1;line-height:1.3}
+.dt{font-size:11px;opacity:.9;font-weight:400}
+h3,h4{margin:14px 0 4px}
+svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.gb{border:0;background:rgba(127,127,127,.22);color:var(--bt);border-radius:12px;width:40px;height:40px;font-size:18px;display:flex;align-items:center;justify-content:center}
+.tt{display:flex;gap:6px;overflow-x:auto;padding:0 0 8px;scrollbar-width:none}
+.t{flex:0 0 auto;border-radius:14px;padding:8px 16px;background:var(--card);color:var(--tx);font:inherit;font-family:'LalezarLocal','Lalezar','VazirLocal','Vazirmatn',sans-serif;font-size:18px;border:1px solid var(--bd)}
+.t.on{background:var(--bar);color:var(--bt);border-color:transparent}
+main{flex:1;overflow:auto;padding:14px;background:transparent}
+nav{position:relative;overflow:hidden;display:flex;padding:8px 9px 10px;border-radius:22px 22px 0 0;box-shadow:0 -4px 18px rgba(0,0,0,.18);z-index:2}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;font:inherit;font-family:'LalezarLocal','Lalezar','VazirLocal','Vazirmatn',sans-serif;font-size:16px;color:inherit;background:none;border:0;border-radius:14px;padding:8px 0;opacity:.85}
+.bi.on{opacity:1;background:rgba(127,127,127,.25);font-weight:800}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 13px;margin:8px 0}
+.c.r{background:rgba(224,76,91,.2);border-color:rgba(224,76,91,.5)}.c.y{background:rgba(234,164,42,.2);border-color:rgba(234,164,42,.5)}.c.g{background:rgba(47,182,117,.2);border-color:rgba(47,182,117,.5)}
+.fx{display:flex;gap:10px;align-items:center}
+.b{border:0;border-radius:12px;padding:9px 14px;background:var(--bar);color:var(--bt);font:inherit;font-family:'LalezarLocal','Lalezar','VazirLocal','Vazirmatn',sans-serif;font-size:19px;flex:1;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.b.g2{background:var(--card);color:var(--tx);border:1px solid var(--bd)}.b.no{background:#dc2626;color:#fff}
+.row{display:flex;gap:8px;margin:8px 0;align-items:center}
+.ov{position:fixed;inset:0;background:rgba(8,12,30,.55);display:flex;align-items:center;justify-content:center;z-index:9;padding:16px}
+.md{background:var(--bg);border-radius:18px;padding:16px;width:100%;max-width:420px;max-height:92%;overflow:auto;border:1px solid var(--bd)}
+.md h3{margin:0 0 8px}
+input,select,textarea{width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;margin:2px 0 8px}
+input[type=checkbox]{width:auto}
+label{font-size:12px;color:var(--mu)}
+.mu{color:var(--mu);font-size:12px}
+.x{border:0;background:none;color:var(--tx);font-size:17px;padding:2px 6px}
+.bar{height:6px;border-radius:4px;background:var(--bd);overflow:hidden}.bar i{display:block;height:100%;background:var(--bar)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal>div{font-size:12px;color:var(--mu)}
+.cal>button{aspect-ratio:1;border-radius:12px;background:var(--card);border:1px solid var(--bd);color:var(--tx);font:inherit;font-size:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0}
+.cal .td{outline:2px solid #dc2626}.cal b{width:6px;height:6px;border-radius:50%;background:#dc2626}
+.sq{width:32px;height:32px;border-radius:10px;border:2px solid var(--mu);background:none;font-size:18px;color:var(--tx);flex:none;padding:0}
+.ok{color:#16a34a;font-weight:800}.nok{color:#dc2626;font-weight:800}.pt{color:#d98a0b}
+.strike{text-decoration:line-through;opacity:.6}
+.sl,.dp{display:flex;gap:6px;align-items:center}
+.ts{position:fixed;top:70px;right:16px;left:16px;z-index:20;background:#16233f;color:#fff;border-radius:12px;padding:12px;text-align:center}
+.cf{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+.cf i{position:absolute;top:-14px;width:9px;height:15px;border-radius:2px;animation:fall 2.4s ease-in forwards}
+.cf u{position:absolute;top:-30px;text-decoration:none;font-size:calc(24px*var(--s));animation:fall 2.8s ease-in forwards}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(720deg)}}
+.cf b{position:absolute;top:34%;width:100%;text-align:center;font:400 36px 'LalezarLocal','Lalezar',sans-serif;color:#fff;text-shadow:0 3px 14px #000,0 0 30px #f0f;animation:pop .7s cubic-bezier(.3,1.8,.5,1)}
+.win{position:fixed;inset:0;z-index:31;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.18),rgba(5,8,25,.88) 68%);animation:winfade .35s ease-out}.winbox{width:min(92vw,390px);padding:28px 20px;border:1px solid rgba(255,220,120,.75);border-radius:28px;text-align:center;color:#fff;background:linear-gradient(145deg,rgba(35,20,65,.96),rgba(8,13,35,.96));box-shadow:0 0 55px rgba(255,190,40,.38),inset 0 0 25px rgba(255,255,255,.08);animation:pop .65s cubic-bezier(.3,1.8,.5,1)}.win-trophy{font-size:66px;filter:drop-shadow(0 0 18px #ffc84a)}.win-title{font:36px 'LalezarLocal','Lalezar',sans-serif;color:#ffdb75;margin:4px 0}.win-sub{font-size:15px;color:#fff}.win-points{font-size:18px;color:#ffe39a;margin-top:12px}@keyframes winfade{from{opacity:0}to{opacity:1}}
+:root[data-tab='agenda'] header,:root[data-tab='agenda'] nav{background:linear-gradient(125deg,#9b28e8 0%,#ec2798 48%,#bd35e8 75%,#693be8 100%)}
+:root[data-tab='kar'] header,:root[data-tab='kar'] nav{background:linear-gradient(110deg,#20c9df 0%,#54c9b6 28%,#c9d98a 48%,#f4df45 70%,#f58a24 88%,#ed5b18 100%);color:#173b39}
+:root[data-tab='kar'] h1,:root[data-tab='kar'] .gb,:root[data-tab='kar'] .bi{color:#173b39}
+:root[data-tab='kar'] .c,:root[data-tab='kar'] input,:root[data-tab='kar'] textarea,:root[data-tab='kar'] select,:root[data-tab='kar'] .t{background:linear-gradient(115deg,rgba(32,201,223,.20),rgba(84,201,182,.22),rgba(244,223,69,.24),rgba(245,138,36,.20));border-color:rgba(255,255,255,.8)}
+header{padding-top:21px;padding-bottom:24px}nav{padding-top:12px;padding-bottom:14px}
+.bi svg{width:25px;height:25px;stroke-width:2.5}.bi:nth-child(1) svg{color:#ffdc4d}.bi:nth-child(2) svg{color:#ff7b7b}.bi:nth-child(3) svg{color:#a8ffde}.bi:nth-child(4) svg{color:#ffe0a3}.bi:nth-child(5) svg{color:#d9c4ff}.bi:nth-child(6) svg{color:#ffb2dd}
+#rewardBtn{font-size:20px;color:#ffdf69}
+
+@keyframes pop{from{transform:scale(.2) rotate(-12deg);opacity:0}}
+.tt.wr{flex-wrap:wrap;overflow:visible}.big2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.big2 .t{font-size:16px;padding:7px 10px;text-align:center}
+@keyframes in{from{transform:translateY(12px) scale(.95);opacity:0}}.c{animation:in .35s}.sq{transition:transform .15s}.sq:active{transform:scale(1.3)}
+.c,.md,.t,.b.g2,.ts{-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.c{border:1px solid rgba(255,255,255,.75);box-shadow:0 8px 26px rgba(40,90,170,.16),inset 0 1px 0 rgba(255,255,255,.85)}
+.md{background:color-mix(in srgb,var(--bg) 72%,transparent)}
+header::after,nav::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,0) 52%)}
+.x svg,.b svg{width:20px;height:20px}.b svg{vertical-align:-4px}.dg{touch-action:none;color:var(--mu);display:flex;cursor:grab}
+summary{cursor:pointer}
+.move-controls{display:none!important}.dg{display:none!important}
+</style>
+</head>
+<body>
+<header><img src="data:image/jpeg;base64,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" alt=""><h1><span id="ht"></span><div class="dt" id="dt"></div></h1><button class="gb" onclick="tg()">🌓</button><button class="gb" id="rewardBtn" title="پاداش تلاش‌ها" onclick="go('reward')"><svg viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0L7 3Z"/><path d="M7 5H4v2a4 4 0 0 0 4 4M17 5h3v2a4 4 0 0 1-4 4M12 14v4m-4 3h8l-1-3H9l-1 3Z"/></svg></button><button class="gb" id="gear" onclick="gs()"></button></header>
+<main id="mn"></main>
+<nav id="bn"></nav>
+<script>
+const $=s=>document.querySelector(s);
+const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const today=()=>iso(new Date());
+const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+function g2j(gy,gm,gd){const g=[0,31,59,90,120,151,181,212,243,273,304,334];const g2=gm>2?gy+1:gy;let days=355666+365*gy+~~((g2+3)/4)-~~((g2+99)/100)+~~((g2+399)/400)+gd+g[gm-1];let jy=-1595+33*~~(days/12053);days%=12053;jy+=4*~~(days/1461);days%=1461;if(days>365){jy+=~~((days-1)/365);days=(days-1)%365}const jm=days<186?1+~~(days/31):7+~~((days-186)/30);const jd=1+(days<186?days%31:(days-186)%30);return[jy,jm,jd]}
+function j2g(jy,jm,jd){jy+=1595;let days=-355668+365*jy+~~(jy/33)*8+~~(((jy%33)+3)/4)+jd+(jm<7?(jm-1)*31:(jm-7)*30+186);let gy=400*~~(days/146097);days%=146097;if(days>36524){gy+=100*~~(--days/36524);days%=36524;if(days>=365)days++}gy+=4*~~(days/1461);days%=1461;if(days>365){gy+=~~((days-1)/365);days=(days-1)%365}let gd=days+1;const sal=[0,31,(gy%4==0&&gy%100!=0)||gy%400==0?29:28,31,30,31,30,31,31,30,31,30,31];let gm;for(gm=0;gm<13&&gd>sal[gm];gm++)gd-=sal[gm];return[gy,gm,gd]}
+const toJ=s=>{const d=parse(s);return g2j(d.getFullYear(),d.getMonth()+1,d.getDate())};
+const fromJ=(y,m,d)=>{const g=j2g(y,m,d);return g[0]+'-'+pad(g[1])+'-'+pad(g[2])};
+const MN=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+const jfmt=s=>s?fa(toJ(s).join('/')):'';
+const jlong=s=>{const j=toJ(s);return fa(j[2])+' '+MN[j[1]-1]+' '+fa(j[0])};
+const dim=(y,m)=>m<7?31:m<12?30:(g2j(...j2g(y,12,30))[1]==12?30:29);
+const dp=(n,s)=>{const j=toJ(s||today()),cy=toJ(today())[0],y0=Math.min(cy-1,j[0]),y1=Math.max(cy+5,j[0]);let ys='';for(let y=y0;y<=y1;y++)ys+=`<option value="${y}" ${y==j[0]?'selected':''}>${fa(y)}</option>`;
+return `<div class="dp" data-n="${n}"><select>${Array.from({length:31},(_,i)=>`<option value="${i+1}" ${j[2]==i+1?'selected':''}>${fa(i+1)}</option>`).join('')}</select><select>${MN.map((m,i)=>`<option value="${i+1}" ${j[1]==i+1?'selected':''}>${m}</option>`).join('')}</select><select>${ys}</select></div>`};
+const dv=(m,n)=>{const s=m.querySelectorAll('[data-n='+n+'] select'),y=+s[2].value,mo=+s[1].value;return fromJ(y,mo,Math.min(+s[0].value,dim(y,mo)))};
+
+const KEY='mgmt_v3';
+let S=null;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+const TS=['کوتاه‌مدت','بلندمدت'];
+S=S||{plan:[],check:[],log:{},due:[],agenda:[],status:{},notes:[],items:{},secs:[]};
+S.rewards=S.rewards||{points:0,ledger:{},settings:{enabled:true,sound:true,visual:true,taskPoints:10,bonusPoints:50},streak:0,lastComplete:''};
+S.rewards.ledger=S.rewards.ledger||{};S.rewards.settings=Object.assign({enabled:true,sound:true,visual:true,taskPoints:10,bonusPoints:50},S.rewards.settings||{});S.rewards.honors=S.rewards.honors||{medal:0,cup:0,statue:0};S.rewards.shop=S.rewards.shop||[{id:'rest',t:'یک روز استراحت',cost:500},{id:'coffee',t:'قهوه یا نوشیدنی دلخواه',cost:100},{id:'movie',t:'تماشای فیلم',cost:250}];S.rewards.coins=S.rewards.coins||0;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}wsync()};
+function wsync(){try{if(!CAP.AgendaWidget)return;const d=today(),all=agItems(d),done=all.filter(x=>S.status[d+'|'+x.k]==1).length,l=all.slice(0,7).map(x=>{const t=S.status[d+'|'+x.k];return (t==1?'✓ ':t===0?'✗ ':'• ')+x.t});const head='امروز: '+done+'/'+all.length+' کار انجام شده';CAP.AgendaWidget.update({text:head+'\n'+(l.join('\n')||'برای امروز کاری ثبت نشده')})}catch(e){}}
+const uid=()=>Math.random().toString(36).slice(2,9);
+const OR={r:0,y:1,g:2};
+const byPri=(a,b)=>OR[a.pri||'y']-OR[b.pri||'y'];
+const CAP=window.Capacitor&&Capacitor.Plugins||{};
+
+/* صدا */
+let AC;const ctx=()=>AC=AC||new(window.AudioContext||webkitAudioContext)();
+const tone=(f,t0,d,type,vol)=>{try{const c=ctx(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+t0;o.type=type||'triangle';o.frequency.setValueAtTime(f,s);o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(vol||.28,s);g.gain.exponentialRampToValueAtTime(.001,s+d);o.start(s);o.stop(s+d)}catch(e){}};
+const sTick=()=>{tone(1400,0,.06,'sine',.35);tone(2100,.05,.1,'sine',.25)},sCross=()=>{tone(220,0,.12,'square',.2);tone(160,.1,.2,'square',.2)};
+function applause(d,vol){try{const c=ctx(),n=c.sampleRate*d,b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0);let e=0;for(let i=0;i<n;i++){if(i%2200==0)e=Math.random();a[i]=(Math.random()*2-1)*Math.sin(Math.PI*i/n)*(.2+.8*e*e)}const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();f.type='highpass';f.frequency.value=900;s.buffer=b;g.gain.value=vol;s.connect(f);f.connect(g);g.connect(c.destination);s.start()}catch(e){}}
+function award(key,points){const r=S.rewards;if(!r.settings.enabled||r.ledger[key])return false;r.ledger[key]=1;r.points=(r.points||0)+points;save();return true}
+function fanfare(){try{const a=new Audio('applause.mp3');a.currentTime=0;a.volume=1;a.play().catch(()=>{});setTimeout(()=>{a.pause();a.currentTime=0},5000)}catch(e){}}
+function celebration(kind,bonus){const r=S.rewards;if(r.settings.sound&&(kind==='check'||kind==='agenda'))fanfare();if(!r.settings.visual)return;const old=document.querySelector('.win');if(old)old.remove();const w=document.createElement('div');w.className='win';w.innerHTML=`<div class="winbox"><div class="win-trophy">🏆</div><div class="win-title">آفرین! فوق‌العاده بودی</div><div class="win-sub">${kind==='agenda'?'تمام دستور کار امروز انجام شد':kind==='check'?'چک‌لیست امروز کامل شد':'تمام کارهای این بخش انجام شد'}</div><div class="win-points">${kind==='check'?'🌟 استمرار تو ارزشمند است':'🪙 سکه‌های تلاش تو ثبت شد'}</div><div style="font-size:12px;color:#d8d5e5;margin-top:10px">تو هر روز از دیروز توانمندتری؛ همین‌طور ادامه بده!</div></div>`;document.body.appendChild(w);const c=document.createElement('div');c.className='cf';for(let i=0;i<85;i++){const e=document.createElement('i');e.style.left=Math.random()*100+'%';e.style.background=['#ffd34e','#ff4fb8','#8d69ff','#fff'][i%4];e.style.setProperty('--dx',(Math.random()*220-110)+'px');e.style.animationDelay=Math.random()*.7+'s';c.appendChild(e)}document.body.appendChild(c);setTimeout(()=>{w.remove();c.remove()},4200);w.onclick=()=>{w.remove();c.remove()}}
+function sDone(all,kind){if(!all){sTick();return}const d=(kind==='check'||kind==='agenda')?cd:today(),key='complete:'+kind+':'+d;if(award(key,0)){if(kind==='check'){const prev=iso(new Date(parse(d).getTime()-864e5));const streak=(S.rewards.checkLast===prev?(S.rewards.checkStreak||0)+1:1);S.rewards.checkStreak=streak;S.rewards.checkLast=d;if(streak===1)S.rewards.honors.medal++;else if(streak===3)S.rewards.honors.cup++;else if(streak===6)S.rewards.honors.statue++;}save();celebration(kind,0)}else if(S.rewards.settings.sound)sTick();}
+let tab='agenda',prev='agenda',cd=today(),cm=null,subI={},ks='personal',pOpen={};
+const IC={plan:'<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',check:'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',agenda:'<rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M12 11h4M12 16h4M8 11h.01M8 16h.01"/>',due:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',notes:'<path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><path d="M15 3v6h6"/>',kar:'<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',set:'<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',trash:'<path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/>',edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',plus:'<path d="M12 5v14M5 12h14"/>',grip:'<circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/>'};
+const EM=h=>h.replace(/🗑/g,ic('trash')).replace(/✏️?/g,ic('edit')).replace(/📋/g,ic('agenda')).replace(/➕ ?/g,ic('plus')+' ');
+const ic=k=>`<svg viewBox="0 0 24 24">${IC[k]}</svg>`;
+const grip='';
+const NAV=[['plan','برنامه'],['check','چک‌لیست'],['agenda','دستور کار'],['due','سررسید'],['notes','یادداشت'],['kar','کارپوشه']];
+const G=(a,b,w,t)=>[`linear-gradient(135deg,${a},${b})`,t||'#fff',w];
+const TH={plan:G('#0be4ff','#1a8fff','#2ab0ff'),check:G('#3fa27a','#cfcf4a','#7fdca0'),agenda:G('#c42a62','#7f3385','#b99cf2'),due:G('#ee4349','#f86a45','#f58a93'),notes:G('#fdd876','#fdad5a','#f8d160','#5a3600'),set:G('#334155','#64748b','#9fb3d0'),kar:['linear-gradient(110deg,#20c9df 0%,#54c9b6 28%,#c9d98a 48%,#f4df45 70%,#f58a24 88%,#ed5b18 100%)','#173b39','#f3d64b'],reward:G('#b8860b','#f7d774','#d6a62d','#4b3500')};
+function waveBG(c){const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" preserveAspectRatio="none"><defs><radialGradient id="r" cx="0" cy=".25" r=".7"><stop offset="0" stop-color="${c}" stop-opacity=".4"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></radialGradient><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c}" stop-opacity=".25"/><stop offset="1" stop-color="${c}" stop-opacity=".75"/></linearGradient></defs><rect width="400" height="800" fill="url(#r)"/><path d="M150 0C255 140 330 330 372 560C395 690 392 760 380 800H400V0Z" fill="url(#g)"/><path d="M300 0C340 150 372 330 380 520C388 680 384 760 392 800H400V0Z" fill="${c}" opacity=".35"/><path d="M170 800C170 650 230 520 300 400C350 310 380 200 400 120V800Z" fill="url(#g)" opacity=".7"/><path d="M250 800C260 700 330 560 400 450V800Z" fill="${c}" opacity=".35"/></svg>`;return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`}
+const PRI=v=>`<select name="pri">${[['r','مهم (قرمز)'],['y','متوسط (زرد)'],['g','کم (سبز)']].map(([k,n])=>`<option value="${k}" ${(v||'y')==k?'selected':''}>${n}</option>`).join('')}</select>`;
+const v=(m,n)=>m.querySelector('[name='+n+']').value;
+
+function modal(title,body,ok,okLabel){const m=document.createElement('div');m.className='ov';m.innerHTML=`<div class="md"><h3>${title}</h3>${EM(body)}<div class="row"><button class="b" id="mo">${okLabel||'ثبت'}</button><button class="b g2" id="mc">انصراف</button></div></div>`;document.body.appendChild(m);m.querySelector('#mc').onclick=()=>m.remove();m.querySelector('#mo').onclick=()=>{if(ok(m)!==false)m.remove()};return m}
+function ask(q,yes,no){const m=document.createElement('div');m.className='ov';m.innerHTML=`<div class="md"><h3>${q}</h3><div class="row"><button class="b" id="y" style="background:#16a34a;color:#fff">بلی ✓</button><button class="b no" id="n">خیر ✗</button></div></div>`;document.body.appendChild(m);m.querySelector('#y').onclick=()=>{m.remove();yes()};m.querySelector('#n').onclick=()=>{m.remove();no()};m.onclick=e=>{if(e.target==m)m.remove()}}
+function toast(t){const e=document.createElement('div');e.className='ts';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),6000)}
+function tg(){const r=document.documentElement;const dk=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dk?'light':'dark'}
+function go(k){tab=k;render();$('#mn').scrollTop=0}
+function gs(){if(tab=='set')tab=prev;else{prev=tab;tab='set'}render()}
+function del(c,id){ask('حذف شود؟',()=>{S[c]=S[c].filter(x=>x.id!=id);save();render()},()=>{})}
+const confirmDel=del;
+
+function render(){const th=TH[tab];document.documentElement.dataset.tab=tab;const b=document.body.style;b.setProperty('--bar',th[0]);b.setProperty('--bt',th[1]);
+$('#ht').textContent=({plan:'برنامه روزانه',check:'چک‌لیست',agenda:'دستور کار',due:'سررسید',notes:'یادداشت‌ها',kar:'کارپوشه',set:'تنظیمات و گزارش',reward:'پاداش تلاش‌ها'})[tab];$('#dt').textContent=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+$('#bn').innerHTML=tab==='reward'?'':NAV.map(([k,n])=>`<button class="bi ${tab==k?'on':''}" onclick="go('${k}')">${ic(k)}${n}</button>`).join('');
+$('#gear').innerHTML=tab=='set'?'✕':ic('set');
+$('#mn').innerHTML=EM(({plan:vPlan,check:vCheck,agenda:vAgenda,due:vDue,notes:vNotes,kar:vKar,set:vSet,reward:vReward}[tab])());if(tab==='reward')$('#bn').innerHTML='';else $('#bn').innerHTML=NAV.map(([k,n],i)=>`<button class="bi ${tab==k?'on':''}" onclick="go('${k}')" style="--i:${i}">${ic(k)}${n}</button>`).join('');dragInit()}
+
+/* برنامه روزانه */
+const slotRow=(a,b)=>`<div class="sl"><input type="time" value="${a||''}"><span>تا</span><input type="time" value="${b||''}"><button class="x" onclick="this.parentNode.remove()">✕</button></div>`;
+const slotsTxt=p=>p.slots.map(s=>'⏰ '+fa(s[0])+(s[1]?' تا '+fa(s[1]):'')).join(' ، ');
+const sortedPlan=()=>S.plan.slice();
+function vPlan(){return `<div class="row"><button class="b" onclick="planF()">➕ برنامه جدید</button><button class="b g2" onclick="planImg()">🖼️ ذخیره به‌صورت عکس</button></div><div data-sort="plan">`+(S.plan.map(p=>{const o=pOpen[p.id];return `<div class="c" data-k="${p.id}"><div class="fx">${grip}<b style="flex:1">${esc(p.t)}</b><button class="x" onclick="planF('${p.id}')">✏️</button><button class="x" onclick="del('plan','${p.id}')">🗑</button></div><div class="mu">${slotsTxt(p)}</div>${o?`<div class="mu">مدت: ${fa(p.dur||0)} دقیقه</div>${p.desc?`<div>${esc(p.desc)}</div>`:''}`:''}<button class="x mu" style="font-size:12px" onclick="pOpen['${p.id}']=${!o};render()">${o?'کمتر':'بیشتر'}</button></div>`}).join('')||'<p class="mu">برنامه‌ای ثبت نشده؛ با «برنامه جدید» شروع کنید.</p>')+'</div>'}
+function planF(id){const p=S.plan.find(x=>x.id==id)||{slots:[]};
+modal(id?'ویرایش برنامه':'برنامه جدید',`<label>نام برنامه</label><input name="t" value="${esc(p.t)}"><label>مدت (دقیقه)</label><input name="dur" type="number" value="${p.dur||''}"><label>بازه‌های زمانی</label><div id="sls">${(p.slots.length?p.slots:[['','']]).map(s=>slotRow(s[0],s[1])).join('')}</div><button class="b g2" style="width:100%" onclick="document.getElementById('sls').insertAdjacentHTML('beforeend',slotRow())">+ بازه زمانی دیگر</button><label>شرح</label><textarea name="desc" rows="3">${esc(p.desc)}</textarea><label><input type="checkbox" name="chk" ${p.id&&S.check.some(c=>c.pid==p.id)?'checked':''}> افزودن این برنامه به چک‌لیست</label>`,m=>{const t=v(m,'t').trim();if(!t)return false;
+const o={id:p.id||uid(),t,dur:+v(m,'dur')||0,desc:v(m,'desc'),slots:[...m.querySelectorAll('.sl')].map(r=>{const i=r.querySelectorAll('input');return[i[0].value,i[1].value]}).filter(s=>s[0])};
+id?Object.assign(p,o):S.plan.push(o);
+const ch=S.check.find(c=>c.pid==o.id);if(m.querySelector('[name=chk]').checked){ch?(ch.t=o.t,ch.dur=o.dur):S.check.push({id:uid(),pid:o.id,t:o.t,dur:o.dur})}else if(ch)S.check=S.check.filter(c=>c!=ch);
+save();render()})}
+async function planImg(){const rows=sortedPlan();if(!rows.length)return toast('برنامه‌ای برای ذخیره نیست');const W=1000,F='Vazirmatn,Tahoma,sans-serif',cv=document.createElement('canvas'),x=cv.getContext('2d');
+x.font='24px '+F;const wrap=(t,mw)=>{const o=[];String(t||'').split('\n').forEach(par=>{let l='';par.split(' ').forEach(w=>{const tt=l?l+' '+w:w;if(x.measureText(tt).width>mw&&l){o.push(l);l=w}else l=tt});o.push(l)});return o};
+const bl=rows.map(p=>({p,d:wrap(p.desc,W-160)})),hh=b=>100+(b.p.desc?b.d.length*38+10:0),H=290+bl.reduce((a,b)=>a+hh(b)+20,0);cv.width=W;cv.height=H;x.direction='rtl';
+const bg=x.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#e3faff');bg.addColorStop(1,'#fff');x.fillStyle=bg;x.fillRect(0,0,W,H);
+const g=x.createLinearGradient(0,0,W,0);g.addColorStop(0,'#0be4ff');g.addColorStop(1,'#1a8fff');x.fillStyle=g;
+x.beginPath();x.moveTo(0,0);x.lineTo(W,0);x.lineTo(W,170);x.bezierCurveTo(700,235,400,110,0,190);x.fill();
+x.beginPath();x.moveTo(0,H);x.lineTo(0,H-90);x.bezierCurveTo(300,H-150,600,H-20,W,H-100);x.lineTo(W,H);x.fill();
+x.fillStyle='#fff';x.textAlign='right';x.font='bold 56px '+F;x.fillText('🗓️ برنامه روزانه',W-50,90);x.font='28px '+F;x.fillText(jlong(today()),W-50,138);
+let y=230;bl.forEach(b=>{const p=b.p,h=hh(b);x.fillStyle='#fff';x.shadowColor='rgba(20,100,200,.3)';x.shadowBlur=18;x.beginPath();(x.roundRect||x.rect).call(x,40,y,W-80,h,26);x.fill();x.shadowBlur=0;
+x.fillStyle='#16233f';x.textAlign='right';x.font='bold 34px '+F;x.fillText(p.t,W-70,y+50);x.fillStyle='#1a8fff';x.textAlign='left';x.font='26px '+F;x.fillText(p.slots.map(s=>fa(s[0])+(s[1]?'–'+fa(s[1]):'')).join(' ، ')+(p.dur?'  ·  '+fa(p.dur)+' دقیقه':''),70,y+50);
+x.fillStyle='#5d6b86';x.textAlign='right';x.font='24px '+F;if(p.desc)b.d.forEach((l,i)=>x.fillText(l,W-70,y+94+i*38));y+=h+20});
+saveImg(cv.toDataURL('image/png'))}
+async function saveImg(url){const F=CAP.Filesystem,M=CAP.Media,name='plan-'+Date.now();let r=null;
+try{if(F)r=await F.writeFile({path:name+'.png',data:url.split(',')[1],directory:'CACHE'})}catch(e){}
+try{if(r&&M){const AL='مدیریت فردی';try{await M.createAlbum({name:AL})}catch(e){}let al;try{al=((await M.getAlbums()).albums||[]).find(a=>a.name==AL)}catch(e){}await M.savePhoto({path:r.uri,albumIdentifier:al&&al.identifier,fileName:name});return toast('تصویر در گالری ذخیره شد ✅')}}catch(e){}
+try{if(r&&CAP.Share){await CAP.Share.share({title:'برنامه روزانه',files:[r.uri]});return}}catch(e){}
+modal('تصویر برنامه',`<img src="${url}" style="width:100%;border-radius:12px"><div class="mu">برای ذخیره، انگشت را روی عکس نگه دارید و «ذخیره تصویر» را بزنید.</div>`,()=>{},'بستن')}
+
+/* تاریخ و نوار روز */
+function shift(n){const d=parse(cd);d.setDate(d.getDate()+n);cd=iso(d);render()}
+function pickDay(){modal('انتخاب روز',dp('d',cd),m=>{cd=dv(m,'d');render()},'برو')}
+const dateBar=()=>`<div class="fx"><button class="sq" onclick="shift(-1)">▶</button><button class="b g2" onclick="pickDay()" style="text-align:center">📅 ${jlong(cd)}${cd==today()?' (امروز)':''}</button><button class="sq" onclick="shift(1)">◀</button></div>`;
+
+/* چک‌لیست */
+function vCheck(){const L=S.log[cd]||{};let td=0,tt=0;
+const rows=S.check.map(c=>{const e=L[c.id];if(e)td+=Math.min(e.d,c.dur);tt+=c.dur;const pc=e&&c.dur?Math.min(100,Math.round(e.d/c.dur*100)):0;
+const s=!e?'':e.s==1?'<span class="ok">✓</span>':e.s===0?'<span class="nok">✗</span>':'<span class="pt">≈</span>';
+return `<div class="c" data-k="${c.id}"><div class="fx">${grip}<button class="sq" onclick="cq('${c.id}')">${s}</button><b style="flex:1" class="${e&&e.s===0?'strike':''}">${esc(c.t)}</b><span class="mu">هدف ${fa(c.dur)} دقیقه</span><button class="x" onclick="chkE('${c.id}')">✏️</button><button class="x" onclick="del('check','${c.id}')">🗑</button></div><div class="row"><input type="number" min="0" placeholder="دقیقه انجام‌شده" value="${e?e.d:''}" onchange="setM('${c.id}',this.value)" style="margin:0"></div><div class="bar"><i style="width:${pc}%"></i></div><div class="mu">${e?fa(pc)+'٪ انجام شد':'ثبت نشده'}</div></div>`}).join('');
+const all=tt?Math.round(td/tt*100):0;
+return dateBar()+`<div class="c"><b>پیشرفت روز: ${fa(all)}٪</b> <span class="mu">(${fa(td)} از ${fa(tt)} دقیقه)</span><div class="bar"><i style="width:${all}%"></i></div></div><div data-sort="check">`+(rows||'<p class="mu">چک‌لیست خالی است. هنگام تعریف برنامه روزانه، گزینه «افزودن به چک‌لیست» را بزنید.</p>')+'</div>'}
+function ask3(q,yes,no,clr){const m=document.createElement('div');m.className='ov';m.innerHTML=`<div class="md"><h3>${q}</h3><div class="row"><button class="b" id="y" style="background:#16a34a;color:#fff">بلی ✓</button><button class="b no" id="n">خیر ✗</button></div>${clr?'<div class="row"><button class="b g2" id="c">برداشتن علامت</button></div>':''}</div>`;document.body.appendChild(m);m.querySelector('#y').onclick=()=>{m.remove();yes()};m.querySelector('#n').onclick=()=>{m.remove();no()};if(clr)m.querySelector('#c').onclick=()=>{m.remove();clr()};m.onclick=e=>{if(e.target==m)m.remove()}}
+function putC(id,d,s){const c=S.check.find(x=>x.id==id),L=S.log[cd]=S.log[cd]||{};L[id]={n:c.t,d,t:c.dur,s};save();render();
+if(s==1){award('check-task:'+cd+':'+id,S.rewards.settings.taskPoints);sDone(S.check.every(k=>L[k.id]&&L[k.id].s==1),'check')}else if(s===0)sCross();else if(d>0)sTick()}
+function cq(id){const e=(S.log[cd]||{})[id],c=S.check.find(x=>x.id==id);ask3('برنامه «'+esc(c.t)+'» انجام شد؟',()=>putC(id,e&&e.d>0?e.d:c.dur,1),()=>putC(id,0,0),e?()=>{delete S.log[cd][id];save();render()}:null)}
+function setM(id,val){const c=S.check.find(x=>x.id==id);if(val===''){delete (S.log[cd]||{})[id];save();return render()}const d=Math.max(0,+val||0);putC(id,d,d>=c.dur?1:d>0?2:0)}
+function chkE(id){const c=S.check.find(x=>x.id==id);modal('ویرایش برنامه چک‌لیست',`<label>نام</label><input name="t" value="${esc(c.t)}"><label>مقدار هدف (دقیقه)</label><input name="dur" type="number" value="${c.dur}">`,m=>{const t=v(m,'t').trim();if(!t)return false;c.t=t;c.dur=+v(m,'dur')||0;save();render()})}
+
+/* سررسید */
+const nid=()=>Math.floor(Math.random()*2e9);
+async function sched(e){const L=CAP.LocalNotifications;if(!L||e.remind===''||e.remind==null)return;const [h,mi]=(e.time||'08:00').split(':').map(Number),t=parse(e.date);t.setHours(h,mi);t.setTime(t.getTime()-e.remind*6e4);if(t<=Date.now())return;try{await L.requestPermissions();await L.createChannel({id:'alarm1',name:'هشدار سررسید',importance:5,visibility:1,vibration:true,sound:'alarm.wav'});await L.schedule({notifications:[{id:e.nid,title:'⏰ '+e.t,body:e.desc||'یادآوری سررسید',channelId:'alarm1',schedule:{at:t,allowWhileIdle:true}}]})}catch(x){}}
+async function unsched(e){try{CAP.LocalNotifications&&await CAP.LocalNotifications.cancel({notifications:[{id:e.nid}]})}catch(x){}}
+function vDue(){if(!cm){const j=toJ(today());cm=[j[0],j[1]]}const [y,m]=cm;
+const f=j2g(y,m,1),col=(new Date(f[0],f[1]-1,f[2]).getDay()+1)%7,n=dim(y,m),t=today();
+let cells=['ش','ی','د','س','چ','پ','ج'].map(x=>`<div>${x}</div>`).join('')+'<span></span>'.repeat(col);
+for(let d=1;d<=n;d++){const k=fromJ(y,m,d),c=S.due.filter(e=>e.date==k).length;cells+=`<button class="${k==t?'td':''}" onclick="dayF('${k}')">${fa(d)}${c?'<b></b>':''}</button>`}
+const up=S.due.filter(e=>e.date>=t).sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||''))).slice(0,6);
+return `<div class="fx"><button class="sq" onclick="mv(-1)">▶</button><b style="flex:1;text-align:center">${MN[m-1]} ${fa(y)}</b><button class="sq" onclick="mv(1)">◀</button></div><div class="cal" style="margin-top:8px">${cells}</div><h4>پیش رو</h4>`+(up.map(e=>`<div class="c ${e.pri||'y'}" onclick="dayF('${e.date}')"><b>${esc(e.t)}</b> <span class="mu">${jfmt(e.date)} ${e.time?fa(e.time):''}</span></div>`).join('')||'<p class="mu">روی یک روز بزنید تا کار یا قرار ثبت کنید.</p>')}
+function mv(n){cm[1]+=n;if(cm[1]>12){cm[1]=1;cm[0]++}if(cm[1]<1){cm[1]=12;cm[0]--}render()}
+const REM=x=>`<select name="rem">${[['','بدون یادآوری'],['0','سر وقت'],['10','۱۰ دقیقه قبل'],['30','۳۰ دقیقه قبل'],['60','۱ ساعت قبل'],['1440','۱ روز قبل']].map(([k,n])=>`<option value="${k}" ${String(x==null?'':x)==k?'selected':''}>${n}</option>`).join('')}</select>`;
+const dueFields=e=>`<label>نام کار یا قرار</label><input name="t" value="${esc(e.t)}"><label>ساعت</label><input name="time" type="time" value="${e.time||''}"><label>توضیحات</label><textarea name="desc" rows="2">${esc(e.desc)}</textarea><label>ارزش انجام کار در دستور کار (سکه)</label><input name="coinValue" type="number" min="0" value="${e.coinValue??10}"><label>یادآوری</label>${REM(e.remind)}<label>اهمیت</label>${PRI(e.pri)}`;
+function saveDue(m,e,d){const t=v(m,'t').trim();if(!t)return false;if(e.id)unsched(e);const o={id:e.id||uid(),nid:e.nid||nid(),date:d,t,time:v(m,'time'),desc:v(m,'desc'),remind:v(m,'rem'),pri:v(m,'pri'),coinValue:Math.max(0,+v(m,'coinValue')||0),fired:0};e.id?Object.assign(e,o):S.due.push(o);save();sched(o)}
+function dueF(id){const e=S.due.find(x=>x.id==id);modal('ویرایش کار یا قرار — '+jlong(e.date),dueFields(e),m=>{if(saveDue(m,e,e.date)===false)return false;render()})}
+function dayF(d){const ev=S.due.filter(e=>e.date==d).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+modal('📅 '+jlong(d),ev.map(e=>`<div class="c ${e.pri||'y'}"><div class="fx"><b style="flex:1">${esc(e.t)}</b><span class="mu">${e.time?fa(e.time):''}${e.remind!==''&&e.remind!=null?' 🔔':''}</span><button class="x" onclick="this.closest('.ov').remove();dueF('${e.id}')">✏️</button><button class="x" onclick="delDue('${e.id}','${d}',this)">🗑</button></div><div class="mu">${esc(e.desc)}</div></div>`).join('')+'<h4>کار یا قرار جدید</h4>'+dueFields({}),m=>{if(v(m,'t').trim())saveDue(m,{},d);render()},'افزودن')}
+function delDue(id,d,b){const e=S.due.find(x=>x.id==id);unsched(e);S.due=S.due.filter(x=>x.id!=id);save();b.closest('.ov').remove();render();dayF(d)}
+setInterval(()=>{if(CAP.LocalNotifications)return;const n=Date.now();S.due.concat(S.agenda).forEach(e=>{if(e.fired||e.remind===''||e.remind==null)return;const [h,mi]=(e.time||'08:00').split(':').map(Number),t=parse(e.date);t.setHours(h,mi);const f=t.getTime()-e.remind*6e4;if(n>=f&&n-f<432e5){e.fired=1;save();toast('🔔 '+e.t);[0,.5,1,1.5,2,2.5].forEach(t=>tone(1568,t,.25,'square',.2))}})},30000);
+
+/* دستور کار */
+const gI=(s,id)=>(S.items[s]||[]).find(i=>i.id==id);
+function agItems(d){const a=[];
+S.due.filter(e=>e.date==d).forEach(e=>a.push({k:'d:'+e.id,t:e.t,desc:e.desc,tag:'سررسید'+(e.time?' · '+fa(e.time):'')+' · 🪙 '+fa(e.coinValue??10),pri:e.pri,coinValue:e.coinValue??10}));
+S.agenda.filter(e=>e.date==d).forEach(e=>a.push({k:'a:'+e.id,t:e.t,desc:e.desc,tag:'دستور کار'+(e.time?' · '+fa(e.time):'')+' · 🪙 '+fa(e.coinValue||10),pri:e.pri,own:e.id,coinValue:e.coinValue||10}));
+const o=(S.ord||{})[d]||[];return a.sort((x,y)=>{const i=o.indexOf(x.k),j=o.indexOf(y.k);return(i<0?999:i)-(j<0?999:j)})}
+function vAgenda(){return dateBar()+`<div class="row"><button class="b" onclick="agF()">➕ کار جدید</button><button class="b g2" onclick="noteAg()">📝 از یادداشت‌ها</button></div><div data-sort="ag">`+(agItems(cd).map(x=>{const st=S.status[cd+'|'+x.k];return `<div class="c ${x.pri||'y'}" data-k="${x.k}"><div class="fx">${grip}<button class="sq" onclick="ag('${x.k}')">${st==1?'<span class="ok">✓</span>':st===0?'<span class="nok">✗</span>':''}</button><div style="flex:1" class="${st==1?'strike':''}"><b>${esc(x.t)}</b><div class="mu">${esc(x.tag)}</div></div>${x.own?`<button class="x" onclick="agF('${x.own}')">✏️</button><button class="x" onclick="delAg('${x.own}')">🗑</button>`:''}</div>${x.desc?`<div class="mu" style="margin-top:4px">${esc(x.desc)}</div>`:''}</div>`}).join('')||'<p class="mu">برای این روز کاری ثبت نشده است.</p>')+'</div>'}
+function ag(k){const st=S.status[cd+'|'+k];ask3('کار انجام شد؟',()=>setSt(k,1),()=>{sCross();postF(k)},st!=null?()=>setSt(k,null):null)}
+function setSt(k,val){if(val==null)delete S.status[cd+'|'+k];else S.status[cd+'|'+k]=val;if(val==1){const x=agItems(cd).find(z=>z.k===k);const raw=x&&x.coinValue!=null?x.coinValue:((S.agenda.find(a=>'a:'+a.id===k)||{}).coinValue??10);if(award('agenda-task:'+cd+':'+k,0))S.rewards.coins+=Math.max(0,+raw||0);}save();render();if(val==1)sDone(agItems(cd).every(x=>S.status[cd+'|'+x.k]==1),'agenda')}
+function postF(k){const nx=iso(new Date(parse(cd).getTime()+864e5));modal('این کار به چه تاریخی موکول شود؟',dp('nd',nx),m=>{const nd=dv(m,'nd'),p=k.split(':'),e=p[0]=='d'?S.due.find(x=>x.id==p[1]):S.agenda.find(x=>x.id==p[1]);e.date=nd;e.fired=0;unsched(e);sched(e);save();render();toast('کار به '+jlong(nd)+' موکول شد')},'موکول شود')}
+function agF(id){const e=S.agenda.find(x=>x.id==id)||{};modal(id?'ویرایش کار':'کار جدید در دستور کار',`<label>عنوان</label><input name="t" value="${esc(e.t)}"><label>ارزش انجام کار (سکه)</label><input name="coinValue" type="number" min="0" value="${e.coinValue??10}"><label>توضیحات</label><textarea name="desc" rows="2">${esc(e.desc)}</textarea><label>تاریخ اضافه شدن به دستور کار</label>${dp('d',e.date||cd)}<label>ساعت (برای یادآوری)</label><input name="time" type="time" value="${e.time||''}"><label>یادآوری</label>${REM(e.remind)}<label>اهمیت</label>${PRI(e.pri)}`,m=>{const t=v(m,'t').trim();if(!t)return false;if(id)unsched(e);const o={id:e.id||uid(),nid:e.nid||nid(),t,desc:v(m,'desc'),date:dv(m,'d'),time:v(m,'time'),remind:v(m,'rem'),pri:v(m,'pri'),coinValue:Math.max(0,+v(m,'coinValue')||0),fired:0};id?Object.assign(e,o):S.agenda.push(o);save();sched(o);render()})}
+function delAg(id){ask('حذف شود؟',()=>{unsched(S.agenda.find(x=>x.id==id));S.agenda=S.agenda.filter(x=>x.id!=id);save();render()},()=>{})}
+function toAg(t,pri,desc){modal('افزودن به دستور کار','<b>'+esc(t)+'</b><label>ارزش انجام کار (سکه)</label><input name="coinValue" type="number" min="0" value="10"><label>در چه تاریخی اضافه شود؟</label>'+dp('d',cd),m=>{const d=dv(m,'d');S.agenda.push({id:uid(),nid:nid(),date:d,t,desc,pri,remind:'',coinValue:Math.max(0,+v(m,'coinValue')||0)});save();render();toast('به دستور کار '+jlong(d)+' اضافه شد')},'افزودن')}
+const noteToAg=id=>{const n=S.notes.find(x=>x.id==id);toAg(n.t,n.pri,n.x)},itemToAg=(s,id)=>{const i=gI(s,id);toAg(i.t,i.pri,i.desc)};
+function noteAg(){if(!S.notes.length)return toast('ابتدا در بخش یادداشت، یادداشتی بنویسید');modal('افزودن یادداشت به دستور کار',`<select name="n">${S.notes.map(n=>`<option value="${n.id}">${esc(n.t)}</option>`).join('')}</select><label>تاریخ اضافه شدن به دستور کار</label>${dp('d',cd)}`,m=>{const n=S.notes.find(x=>x.id==v(m,'n'));S.agenda.push({id:uid(),nid:nid(),date:dv(m,'d'),t:n.t,desc:n.x,pri:n.pri,remind:''});save();render()},'افزودن')}
+function reorder(kind,keys){if(kind=='ag'){(S.ord=S.ord||{})[cd]=keys;return}const arr=kind.slice(0,2)=='i:'?S.items[kind.slice(2)]:S[kind];const ord=keys.map(k=>arr.find(x=>x.id==k));arr.map((x,i)=>keys.includes(x.id)?i:-1).filter(i=>i>=0).forEach((p,j)=>arr[p]=ord[j])}
+function moveRow(kind,key,delta){
+  const box=[...document.querySelectorAll('[data-sort]')].find(x=>x.dataset.sort===kind);
+  if(!box)return;
+  const keys=[...box.querySelectorAll(':scope > [data-k]')].map(x=>x.dataset.k);
+  const from=keys.indexOf(key),to=from+delta;
+  if(from<0||to<0||to>=keys.length)return;
+  [keys[from],keys[to]]=[keys[to],keys[from]];
+  reorder(kind,keys);save();render();
+}
+function dragInit(){}
+
+/* یادداشت */
+function vNotes(){return `<div class="row"><button class="b" onclick="noteF()">➕ یادداشت جدید</button></div><div class="mu">🔴 اهمیت زیاد · 🟡 متوسط · 🟢 کم</div><div data-sort="notes">`+(S.notes.map(n=>`<div class="c ${n.pri||'y'}" data-k="${n.id}"><div class="fx">${grip}<b style="flex:1" onclick="noteF('${n.id}')">${esc(n.t)}</b><button class="x" onclick="noteToAg('${n.id}')">📋</button><button class="x" onclick="noteF('${n.id}')">✏️</button><button class="x" onclick="del('notes','${n.id}')">🗑</button></div>${n.date?`<div class="mu">📅 ${jfmt(n.date)}</div>`:''}<div style="white-space:pre-wrap">${esc(n.x)}</div></div>`).join('')||'<p class="mu">یادداشتی ندارید.</p>')+'</div>'}
+function noteF(id){const n=S.notes.find(x=>x.id==id)||{};modal(id?'ویرایش یادداشت':'یادداشت جدید',`<label>عنوان</label><input name="t" value="${esc(n.t)}"><label>شرح</label><textarea name="x" rows="5">${esc(n.x)}</textarea><label><input type="checkbox" name="hd" ${n.date?'checked':''}> افزودن تاریخ (اختیاری)</label>${dp('nd',n.date)}<label>درجه اهمیت</label>${PRI(n.pri)}`,m=>{const t=v(m,'t').trim();if(!t)return false;const o={id:n.id||uid(),t,x:v(m,'x'),pri:v(m,'pri'),date:m.querySelector('[name=hd]').checked?dv(m,'nd'):''};id?Object.assign(n,o):S.notes.push(o);save();render()})}
+
+/* کارپوشه */
+const FL=[['range','بازه تاریخ (از تاریخ تا تاریخ)'],['desc','شرح'],['agenda','اضافه کردن به دستور کار'],['pri','رنگ‌بندی اهمیت'],['term','دو فیلد بلندمدت و کوتاه‌مدت']];
+function vKar(){if(!S.secs.some(s=>s.id==ks))ks=S.secs[0]&&S.secs[0].id;const s=S.secs.find(x=>x.id==ks);
+return `<div class="tt wr">${S.secs.map(x=>`<button class="t ${x.id==ks?'on':''}" onclick="ks='${x.id}';render()">${x.i} ${esc(x.t)}</button>`).join('')}<button class="t" onclick="secF()">➕ بخش جدید</button></div>`+(s?`<div class="row"><button class="b g2" onclick="secF('${s.id}')">✏️ ویرایش بخش</button><button class="b g2" onclick="delSec('${s.id}')">🗑 حذف بخش</button></div>`+secBody(s):'<p class="mu">کارپوشه خالی است. با «بخش جدید» اولین بخش را بسازید.</p>')}
+function secBody(s){const f=s.f||{},si=f.term?(subI[s.id]||0):0,lim=Date.now()-30*864e5;
+const list=(S.items[s.id]||[]).filter(i=>(i.sub||0)==si&&!(i.done&&i.doneAt&&parse(i.doneAt)<lim));
+return (f.term?`<div class="big2" style="margin-bottom:8px">${TS.map((n,k)=>`<button class="t ${k==si?'on':''}" onclick="subI['${s.id}']=${k};render()">${n}</button>`).join('')}</div>`:'')+`<div class="row"><button class="b" onclick="itemF('${s.id}')">➕ افزودن</button></div><div data-sort="i:${s.id}">`+(list.map(i=>`<div class="c ${f.pri?i.pri||'y':''}" data-k="${i.id}"><div class="fx">${grip}<button class="sq" onclick="tick('${s.id}','${i.id}')">${i.done?'<span class="ok">✓</span>':''}</button><div style="flex:1" class="${i.done?'strike':''}" onclick="itemF('${s.id}','${i.id}')"><b>${esc(i.t)}</b>${f.range&&i.from?`<div class="mu">${jfmt(i.from)} تا ${jfmt(i.to)}</div>`:''}</div>${f.agenda?`<button class="x" onclick="itemToAg('${s.id}','${i.id}')">📋</button>`:''}<button class="x" onclick="itemF('${s.id}','${i.id}')">✏️</button><button class="x" onclick="delI('${s.id}','${i.id}')">🗑</button></div>${f.desc&&i.desc?`<div class="mu">${esc(i.desc)}</div>`:''}</div>`).join('')||'<p class="mu">موردی ثبت نشده است.</p>')+'</div>'}
+function tick(s,id){const i=gI(s,id);i.done=!i.done;i.doneAt=i.done?today():'';if(i.done)award('folder-task:'+s+':'+id,S.rewards.settings.taskPoints);save();render();if(i.done){const items=S.items[s]||[];if(items.length&&items.every(x=>x.done))sDone(true,'folder:'+s);else sTick()}}
+function delI(s,id){ask('حذف شود؟',()=>{S.items[s]=S.items[s].filter(i=>i.id!=id);save();render()},()=>{})}
+function itemF(sid,id){const s=S.secs.find(x=>x.id==sid),f=s.f||{},i=gI(sid,id)||{};
+modal(id?'ویرایش':'افزودن',`<label>عنوان</label><input name="t" value="${esc(i.t)}">`+(f.desc?`<label>شرح</label><textarea name="d" rows="3">${esc(i.desc)}</textarea>`:'')+(f.range?`<label><input type="checkbox" name="hr" ${i.from?'checked':''}> بازه زمانی دارد (اختیاری)</label><label>از تاریخ</label>${dp('from',i.from)}<label>تا تاریخ</label>${dp('to',i.to)}`:'')+(f.pri?`<label>اهمیت</label>${PRI(i.pri)}`:''),m=>{const t=v(m,'t').trim();if(!t)return false;const o={id:i.id||uid(),t,sub:id?i.sub:(f.term?(subI[sid]||0):0)};if(f.desc)o.desc=v(m,'d');if(f.range){const h=m.querySelector('[name=hr]').checked;o.from=h?dv(m,'from'):'';o.to=h?dv(m,'to'):''}if(f.pri)o.pri=v(m,'pri');
+if(id)Object.assign(i,o);else(S.items[sid]=S.items[sid]||[]).push(o);save();render()})}
+function secF(id){const s=S.secs.find(x=>x.id==id)||{f:{}};modal(id?'ویرایش بخش':'بخش جدید در کارپوشه',`<label>عنوان</label><input name="t" value="${esc(s.t)}"><label>ایموجی</label><input name="i" value="${esc(s.i||'⭐')}"><label>این بخش چه امکاناتی داشته باشد؟</label>`+FL.map(([k,n])=>`<div><label style="font-size:15px;color:var(--tx)"><input type="checkbox" name="f_${k}" ${s.f&&s.f[k]?'checked':''}> ${n}</label></div>`).join(''),m=>{const t=v(m,'t').trim();if(!t)return false;const f={};FL.forEach(([k])=>f[k]=m.querySelector('[name=f_'+k+']').checked);const o={t,i:v(m,'i')||'⭐',f};if(id)Object.assign(s,o);else{o.id='s'+uid();S.secs.push(o);ks=o.id}save();render()})}
+function delSec(id){ask('این بخش و همه موارد آن حذف شود؟',()=>{S.secs=S.secs.filter(s=>s.id!=id);delete S.items[id];save();render()},()=>{})}
+
+
+function vReward(){const r=S.rewards,h=r.honors,shop=r.shop||[];return `<div class="row"><button class="b g2" onclick="go('agenda')">بازگشت به برنامه</button></div><div class="c" style="text-align:center;background:linear-gradient(120deg,#fff1a8,#e6a92d,#fff0a3);color:#573b00"><div style="font-size:15px">موجودی سکه‌های من</div><div style="font-size:38px;font-weight:900">🪙 ${fa(r.coins||0)}</div></div><h3>🏆 افتخارات من</h3><div class="grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><div class="c" style="text-align:center"><div style="font-size:38px">🏅</div><b>گردن‌آویز</b><div>${fa(h.medal||0)} عدد</div><button class="b g2" onclick="honorExchange('medal',30)">تبدیل · ۳۰ سکه</button></div><div class="c" style="text-align:center"><div style="font-size:38px">🏆</div><b>کاپ طلا</b><div>${fa(h.cup||0)} عدد</div><button class="b g2" onclick="honorExchange('cup',120)">تبدیل · ۱۲۰ سکه</button></div><div class="c" style="text-align:center"><div style="font-size:38px">🗿</div><b>مجسمه طلا</b><div>${fa(h.statue||0)} عدد</div><button class="b g2" onclick="honorExchange('statue',300)">تبدیل · ۳۰۰ سکه</button></div></div><h3>🎁 تبدیل سکه</h3><div class="row"><button class="b" onclick="shopF()">➕ افزودن پاداش جدید</button></div>`+(shop.map(x=>`<div class="c fx"><div style="flex:1"><b>${esc(x.t)}</b><div class="mu">${fa(x.cost)} سکه</div></div><button class="b" style="flex:0 0 auto" onclick="redeem('${x.id}')">تبدیل</button><button class="x" onclick="shopF('${x.id}')">✏️</button><button class="x" onclick="shopDel('${x.id}')">🗑</button></div>`).join('')||'<p class="mu">هنوز پاداشی تعریف نشده است.</p>')+`<div class="c mu">برای دریافت هر پاداش، سکه‌های لازم از موجودی شما کم می‌شود.</div>`}
+function honorExchange(k,n){const h=S.rewards.honors;if(!h[k])return toast('این افتخار هنوز کسب نشده است');ask('این افتخار به '+fa(n)+' سکه تبدیل شود؟',()=>{h[k]--;S.rewards.coins=(S.rewards.coins||0)+n;save();render()},()=>{})}
+function shopF(id){const x=(S.rewards.shop||[]).find(z=>z.id==id)||{};modal(id?'ویرایش پاداش':'افزودن پاداش',`<label>عنوان پاداش</label><input name="t" value="${esc(x.t||'')}"><label>هزینه به سکه</label><input name="cost" type="number" min="1" value="${x.cost||100}">`,m=>{const t=v(m,'t').trim(),cost=Math.max(1,+v(m,'cost')||0);if(!t)return false;if(id)Object.assign(x,{t,cost});else S.rewards.shop.push({id:uid(),t,cost});save();render()})}
+function shopDel(id){ask('این پاداش حذف شود؟',()=>{S.rewards.shop=S.rewards.shop.filter(x=>x.id!==id);save();render()},()=>{})}
+function redeem(id){const x=S.rewards.shop.find(z=>z.id==id);if(!x)return;if((S.rewards.coins||0)<x.cost)return toast('سکه کافی نیست');ask('تبدیل '+fa(x.cost)+' سکه برای «'+x.t+'»؟',()=>{S.rewards.coins-=x.cost;S.rewards.redeemed=S.rewards.redeemed||[];S.rewards.redeemed.push({t:x.t,cost:x.cost,date:today()});save();render();toast('پاداش ثبت شد؛ از خودت پذیرایی کن!')},()=>{})}
+
+/* تنظیمات، پشتیبان و آمار */
+function vSet(){return `<h3>💾 پشتیبان‌گیری و بازیابی</h3><div class="row"><button class="b" onclick="backup()">پشتیبان‌گیری از اطلاعات</button></div><label>بارگذاری اطلاعات از فایل پشتیبان</label><input type="file" accept=".json,application/json" onchange="restore(this)">`+vArch()}
+async function backup(){const data=JSON.stringify(S),name='personal-manager-backup-'+today()+'.json';try{if(CAP.Filesystem){await CAP.Filesystem.writeFile({path:name,data,directory:'DOCUMENTS',encoding:'utf8'});return toast('پشتیبان در پوشه Documents گوشی ذخیره شد: '+name)}}catch(e){}
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download=name;a.click();toast('فایل پشتیبان ذخیره شد')}
+function restore(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(!o.secs)throw 0;S=o;save();render();toast('اطلاعات بارگذاری شد ✅')}catch(e){toast('فایل پشتیبان معتبر نیست')}};r.readAsText(f)}
+function vArch(){const lim=Date.now()-30*864e5;let h='<h3>🗄️ بایگانی کارهای انجام‌شده</h3>',any=0;
+S.secs.forEach(s=>{const l=(S.items[s.id]||[]).filter(i=>i.done&&i.doneAt&&parse(i.doneAt)<lim);if(l.length){any=1;h+=`<h4>${s.i} ${esc(s.t)}</h4>`+l.map(i=>`<div class="c ${i.pri||'y'}"><span class="strike">${esc(i.t)}</span> <span class="mu">${jfmt(i.doneAt)}</span></div>`).join('')}});
+if(!any)h+='<p class="mu">کارهای انجام‌شده، ۳۰ روز بعد از انجام اینجا بایگانی می‌شوند.</p>';
+return h+'<h3>📊 گزارش و آمار چک‌لیست</h3>'+stat()}
+function stat(){const Y={};Object.keys(S.log).sort().forEach(d=>{const j=toJ(d),a=Y[j[0]]=Y[j[0]]||{};(a[j[1]]=a[j[1]]||[]).push([d,S.log[d]])});
+const agg=days=>{const A={};let D=0,T=0;days.forEach(r=>Object.values(r[1]).forEach(e=>{const a=A[e.n]=A[e.n]||[0,0],d=Math.min(e.d,e.t);a[0]+=d;a[1]+=e.t;D+=d;T+=e.t}));return[T?Math.round(D/T*100):0,Object.entries(A).map(([n,a])=>`<div class="mu">• ${esc(n)}: ${fa(a[0])} از ${fa(a[1])} دقیقه (${fa(a[1]?Math.round(a[0]/a[1]*100):0)}٪)</div>`).join('')]};
+return Object.keys(Y).sort((a,b)=>b-a).map(y=>{const ms=Y[y],ya=agg(Object.values(ms).flat());return `<details class="c"><summary><b>سال ${fa(y)}</b> — ${fa(ya[0])}٪</summary>${ya[1]}`+Object.keys(ms).sort((a,b)=>b-a).map(m=>{const ma=agg(ms[m]);return `<details style="margin:6px 10px"><summary>${MN[m-1]} — ${fa(ma[0])}٪</summary>${ma[1]}`+ms[m].slice().reverse().map(r=>{const da=agg([r]);return `<details style="margin:4px 10px"><summary>${jfmt(r[0])} — ${fa(da[0])}٪</summary>${da[1]}</details>`}).join('')+'</details>'}).join('')+'</details>'}).join('')||'<p class="mu">هنوز آماری ثبت نشده است.</p>'}
+render();wsync();
+</script>
+</body>
+</html>

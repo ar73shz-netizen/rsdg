@@ -1,0 +1,6 @@
+{
+  "appId": "com.mihan.personalmanager",
+  "appName": "مدیریت فردی",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}
